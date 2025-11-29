@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{TRAINER_NAME}} | Strength & Conditioning in {{CITY}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #111;
+      color: #fff;
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    section {
+      padding: 64px 0;
+    }
+    @media (max-width: 768px) {
+      section {
+        padding: 48px 0;
+      }
+    }
+    header {
+      background: #000;
+      border-bottom: 2px solid #e53935;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .brand span {
+      display: block;
+      font-size: 1.05rem;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+    nav a {
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #e53935;
+      transition: width 0.25s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .nav-cta {
+      background: #e53935;
+      padding: 8px 16px;
+      border-radius: 999px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+      background: #ff5252;
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    @media (max-width: 992px) {
+      nav {
+        position: fixed;
+        inset: 56px 0 auto 0;
+        background: rgba(0,0,0,0.98);
+        flex-direction: column;
+        padding: 24px 16px 32px;
+        gap: 16px;
+        transform: translateY(-120%);
+        transition: transform 0.3s ease;
+      }
+      nav.open {
+        transform: translateY(0);
+      }
+      .nav-toggle {
+        display: flex;
+      }
+    }
+    .hero {
+      background: radial-gradient(circle at top left,#444 0,#111 55%,#000 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background-image: linear-gradient(135deg,transparent 60%,#e53935 60%,#e53935 72%,transparent 72%);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 992px) {
+      .hero-inner {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .hero-tagline {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+    .hero-headline {
+      font-size: clamp(2.4rem,4vw,3.3rem);
+      text-transform: uppercase;
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .hero-headline span {
+      color: #e53935;
+      display: block;
+    }
+    .hero-subheadline {
+      font-size: 1rem;
+      max-width: 420px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .hero-meta {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 24px;
+      background: #e53935;
+      border-radius: 4px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.6);
+      background: #ff5252;
+    }
+    .btn-ghost {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.85;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+      opacity: 1;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.7);
+    }
+    .hero-note {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+    .hero-slider {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.85);
+      isolation: isolate;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+    }
+    .hero-slide.active {
+      opacity: 1;
+    }
+    .hero-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,rgba(0,0,0,0.65),rgba(0,0,0,0.1));
+      pointer-events: none;
+    }
+    .hero-label {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(229,57,53,0.9);
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+    }
+    .hero-dots {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .hero-dot.active {
+      background: #e53935;
+      transform: scale(1.2);
+    }
+    .activate-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #00E676;
+      color: #000;
+      font-weight: 700;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 24px;
+      font-size: 1.05rem;
+    }
+    .activate-btn:hover {
+      background: #00c765;
+    }
+    @media (max-width: 768px) {
+      .activate-btn {
+        width: 100%;
+        font-size: 1.15rem;
+      }
+    }
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      font-size: 0.75rem;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .programs-section {
+      background: linear-gradient(170deg,#1a1a1a 60%,#111 60%);
+      position: relative;
+      overflow: hidden;
+    }
+    .programs-section::before {
+      content: "";
+      position: absolute;
+      inset: -140px;
+      background-image: linear-gradient(-9deg,transparent 65%,#e53935 65%,#e53935 74%,transparent 74%);
+      opacity: 0.16;
+      pointer-events: none;
+    }
+    .programs-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .programs-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .program-card {
+      background: #000;
+      border-radius: 16px;
+      padding: 18px 18px 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.9);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .program-card::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background-image: linear-gradient(140deg,transparent 40%,rgba(229,57,53,0.45) 40%,transparent 65%);
+      opacity: 0.35;
+      transform: translateY(10px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .program-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+      border-color: rgba(229,57,53,0.7);
+    }
+    .program-card:hover::before {
+      transform: translateY(0);
+      opacity: 0.65;
+    }
+    .program-name {
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+    .program-price {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: #ff8a80;
+      margin-bottom: 10px;
+    }
+    .program-features {
+      list-style: none;
+      margin-bottom: 16px;
+      font-size: 0.88rem;
+      opacity: 0.9;
+    }
+    .program-features li::before {
+      content: "✚";
+      margin-right: 6px;
+      color: #e53935;
+      font-size: 0.8rem;
+    }
+    .program-cta {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+    }
+    .program-cta span {
+      font-size: 1rem;
+    }
+    .stories-section {
+      background: #111;
+    }
+    .stories-board {
+      background: #c79a63;
+      background-image: radial-gradient(circle at 0 0,rgba(255,255,255,0.4) 0,transparent 40%), radial-gradient(circle at 100% 100%,rgba(0,0,0,0.4) 0,transparent 45%);
+      border-radius: 18px;
+      padding: 26px 18px 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.7);
+    }
+    .stories-strip {
+      position: absolute;
+      inset: -30px;
+      background: #000;
+      transform: rotate(-8deg);
+      transform-origin: center;
+      opacity: 0.18;
+    }
+    .stories-items {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 12px;
+      z-index: 1;
+    }
+    @media (max-width: 900px) {
+      .stories-items {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .story-card {
+      background: #fdf4e3;
+      color: #222;
+      border-radius: 8px;
+      padding: 14px 12px 16px;
+      transform-origin: top center;
+      position: relative;
+      box-shadow: 0 11px 22px rgba(0,0,0,0.4);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .story-card:nth-child(2) {
+      transform: rotate(-3deg);
+    }
+    .story-card:nth-child(3) {
+      transform: rotate(2deg);
+    }
+    .story-card::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #e53935;
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+    .story-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .story-body {
+      font-size: 0.8rem;
+    }
+    .story-meta {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .story-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.7);
+    }
+    .stories-footer-btn {
+      margin-top: 16px;
+      display: inline-block;
+      background: #e53935;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.6);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .stories-footer-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.8);
+      background: #ff5252;
+    }
+    .events-section {
+      background: #000;
+    }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 18px;
+    }
+    @media (max-width: 900px) {
+      .events-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .event-card {
+      background: #181818;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.85);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .event-card::before {
+      content: "";
+      position: absolute;
+      inset: -30px;
+      background: linear-gradient(150deg,rgba(229,57,53,0.65),transparent 60%);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .event-title {
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .event-meta {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-bottom: 12px;
+    }
+    .event-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: #e53935;
+      padding: 4px 9px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .event-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(229,57,53,0.6);
+      box-shadow: 0 18px 32px rgba(0,0,0,0.9);
+    }
+    .results-section {
+      background: #111;
+    }
+    .results-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+    }
+    .results-track {
+      display: flex;
+      transition: transform 0.6s ease;
+      will-change: transform;
+    }
+    .result-slide {
+      min-width: 100%;
+      position: relative;
+      max-height: 380px;
+    }
+    .result-slide img {
+      width: 100%;
+      height: 100%;
+    }
+    .result-tag {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: rgba(0,0,0,0.78);
+      padding: 8px 14px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+    }
+    .results-controls {
+      position: absolute;
+      inset: auto 12px 12px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+    .results-arrow-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .results-arrow-btn:hover {
+      background: rgba(229,57,53,0.8);
+      transform: translateY(-2px);
+    }
+    .results-dots {
+      display: flex;
+      gap: 6px;
+      pointer-events: auto;
+    }
+    .results-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .results-dot.active {
+      background: #e53935;
+      transform: scale(1.2);
+    }
+    .reviews-section {
+      background: #000;
+    }
+    .reviews-carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 12px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.9);
+    }
+    .reviews-track {
+      display: flex;
+      gap: 12px;
+      transition: transform 0.5s ease;
+      will-change: transform;
+    }
+    .review-card {
+      min-width: 260px;
+      max-width: 260px;
+      background: #181818;
+      border-radius: 12px;
+      padding: 14px 14px 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.8);
+      border-color: rgba(229,57,53,0.7);
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .review-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .review-stars {
+      font-size: 0.8rem;
+      color: #ffc400;
+    }
+    .review-body {
+      font-size: 0.82rem;
+      opacity: 0.88;
+      margin-bottom: 8px;
+    }
+    .review-meta {
+      font-size: 0.72rem;
+      opacity: 0.7;
+    }
+    .review-google-badge {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.7;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 24px;
+      align-items: flex-start;
+    }
+    @media (max-width: 900px) {
+      .tools-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .tool-card {
+      background: #151515;
+      border-radius: 18px;
+      padding: 20px 18px 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.9);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .tool-card::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle at top left,rgba(229,57,53,0.9),transparent 60%);
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    .tool-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(229,57,53,0.8);
+      box-shadow: 0 20px 38px rgba(0,0,0,0.9);
+    }
+    .tool-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .tool-subtitle {
+      font-size: 0.86rem;
+      opacity: 0.8;
+      margin-bottom: 12px;
+    }
+    .tool-form-group {
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+    }
+    .tool-form-group label {
+      display: block;
+      margin-bottom: 4px;
+      opacity: 0.85;
+    }
+    .tool-form-group input,
+    .tool-form-group select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .tool-form-group input:focus,
+    .tool-form-group select:focus {
+      border-color: #e53935;
+      box-shadow: 0 0 0 1px rgba(229,57,53,0.4);
+      background: rgba(0,0,0,0.7);
+    }
+    .tool-button {
+      margin-top: 4px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #e53935;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .tool-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.9);
+      background: #ff5252;
+    }
+    .tool-result {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      background: rgba(0,0,0,0.6);
+      padding: 10px 10px;
+      border-radius: 10px;
+      border: 1px dashed rgba(255,255,255,0.2);
+    }
+    .tool-note {
+      margin-top: 8px;
+      font-size: 0.76rem;
+      opacity: 0.7;
+    }
+    .reaction-display {
+      margin-top: 10px;
+      border-radius: 14px;
+      padding: 30px 16px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      border: 1px dashed rgba(255,255,255,0.3);
+      transition: background 0.25s ease, transform 0.1s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .reaction-display.ready {
+      background: linear-gradient(135deg,#1a237e,#0d47a1);
+    }
+    .reaction-display.wait {
+      background: linear-gradient(135deg,#4e342e,#3e2723);
+    }
+    .reaction-display.go {
+      background: linear-gradient(135deg,#1b5e20,#2e7d32);
+      box-shadow: 0 18px 36px rgba(0,0,0,0.9);
+      border-color: rgba(0,0,0,0.4);
+    }
+    .reaction-display:active {
+      transform: scale(0.99);
+    }
+    .quiz-section {
+      background: #111;
+    }
+    .quiz-card {
+      background: #151515;
+      border-radius: 22px;
+      padding: 24px 20px 26px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 36px rgba(0,0,0,0.95);
+      display: grid;
+      grid-template-columns: 120px minmax(0,1fr);
+      gap: 20px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .quiz-card {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .quiz-card::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle at top right,rgba(229,57,53,0.9),transparent 60%);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .quiz-avatar-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quiz-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%,#ff8a80,#e53935);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.3rem;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-avatar::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255,255,255,0.5);
+    }
+    .quiz-content {
+      position: relative;
+      z-index: 1;
+    }
+    .quiz-question {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .quiz-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .quiz-option {
+      flex: 1 1 150px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(0,0,0,0.5);
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .quiz-option:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.9);
+    }
+    .quiz-option.correct {
+      background: #2e7d32;
+      border-color: #66bb6a;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.9);
+    }
+    .quiz-option.incorrect {
+      background: #b71c1c;
+      border-color: #ef5350;
+      animation: quiz-shake 0.28s linear;
+    }
+    @keyframes quiz-shake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-4px); }
+      40% { transform: translateX(4px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+    .quiz-feedback {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    footer {
+      background: #000;
+      border-top: 2px solid #e53935;
+      padding: 32px 0 18px;
+      font-size: 0.8rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 2.2fr 1.5fr;
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      .footer-inner {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .footer-col-title {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+    .footer-links {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .footer-links li {
+      margin-bottom: 4px;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      opacity: 0.7;
+      font-size: 0.72rem;
+    }
+    .footer-pay-link {
+      color: #00E676;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal.slide-left {
+      transform: translateX(40px);
+    }
+    .reveal.slide-left.visible {
+      transform: translateX(0);
+    }
+    .reveal.slide-right {
+      transform: translateX(-40px);
+    }
+    .reveal.slide-right.visible {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span>{{TRAINER_NAME}}</span>
+        Strength &amp; Conditioning · {{CITY}}
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav id="mainNav">
+        <a href="#programs">Programs</a>
+        <a href="#results">Results</a>
+        <a href="#stories">Stories</a>
+        <a href="#events">Events</a>
+        <a href="#contact" class="nav-cta">Join the Revolution</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero reveal slide-left" id="top">
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-tagline">
+          Volume 01 · Issue 24 · Est. 2024 · {{CITY}}
+        </div>
+        <h1 class="hero-headline">
+          <span>{{HEADLINE}}</span>
+          {{SUBHEADLINE}}
+        </h1>
+        <p class="hero-subheadline">
+          The editorial approach to elite performance. Crafted by {{TRAINER_NAME}} for real-world results.
+        </p>
+        <p class="hero-meta">
+          Strength · Conditioning · Hypertrophy · Confidence
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn-primary">
+            Start Your Journey
+          </a>
+          <a href="#programs" class="btn-ghost">
+            Explore Programs
+          </a>
+        </div>
+        <a href="https://www.paypal.com/ncp/payment/NEYDX3SHPX7Z4" class="activate-btn" target="_blank" rel="noopener">
+          Activate Your Coaching Access
+        </a>
+        <p class="hero-note">
+          No guesswork. No fluff. Just structured training, proven systems, and world-class accountability with {{TRAINER_NAME}}.
+        </p>
+      </div>
+      <div class="hero-slider" id="heroSlider">
+        <div class="hero-slide active">
+          <img src="{{HERO_IMAGE}}" alt="Hero transformation image">
+          <div class="hero-label">Feature Story · Your Next Chapter</div>
+        </div>
+        <div class="hero-slide">
+          <img src="{{RESULT_IMAGE_1}}" alt="Client transformation result">
+          <div class="hero-label">Client Issue · Before &amp; After</div>
+        </div>
+        <div class="hero-slide">
+          <img src="{{RESULT_IMAGE_2}}" alt="Client transformation result">
+          <div class="hero-label">Field Report · Progress in Motion</div>
+        </div>
+        <div class="hero-dots" id="heroDots">
+          <div class="hero-dot active" data-index="0"></div>
+          <div class="hero-dot" data-index="1"></div>
+          <div class="hero-dot" data-index="2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="programs-section reveal" id="programs" data-programs="{{PROGRAMS}}">
+    <div class="container">
+      <div class="section-kicker">Featured Programs</div>
+      <h2 class="section-title">Build Your Own Cover Story</h2>
+      <p class="section-subtitle">
+        Choose the training format that matches your lifestyle. Every program includes coaching, accountability, and a clear roadmap from day one.
+      </p>
+      <div class="programs-grid">
+        <article class="program-card">
+          <h3 class="program-name">{{PROGRAM_1_NAME}}</h3>
+          <div class="program-price">{{PROGRAM_1_PRICE}}</div>
+          <ul class="program-features">
+            <li>{{PROGRAM_1_FEATURE_1}}</li>
+            <li>{{PROGRAM_1_FEATURE_2}}</li>
+            <li>{{PROGRAM_1_FEATURE_3}}</li>
+          </ul>
+          <div class="program-cta">
+            Explore Program <span>→</span>
+          </div>
+        </article>
+        <article class="program-card">
+          <h3 class="program-name">{{PROGRAM_2_NAME}}</h3>
+          <div class="program-price">{{PROGRAM_2_PRICE}}</div>
+          <ul class="program-features">
+            <li>{{PROGRAM_2_FEATURE_1}}</li>
+            <li>{{PROGRAM_2_FEATURE_2}}</li>
+            <li>{{PROGRAM_2_FEATURE_3}}</li>
+          </ul>
+          <div class="program-cta">
+            Explore Program <span>→</span>
+          </div>
+        </article>
+      </div>
+      <a href="https://www.paypal.com/ncp/payment/NEYDX3SHPX7Z4" class="activate-btn" target="_blank" rel="noopener">
+        Activate My Program Slot
+      </a>
+    </div>
+  </section>
+  <section class="stories-section reveal slide-right" id="stories">
+    <div class="container">
+      <div class="section-kicker">Client Stories</div>
+      <h2 class="section-title">Real People, Editorial-Worthy Results</h2>
+      <p class="section-subtitle">
+        Every client is treated like the headline feature. Structured training, simple nutrition, and a story worth sharing.
+      </p>
+      <div class="stories-board">
+        <div class="stories-strip"></div>
+        <div class="stories-items">
+          <div class="story-card">
+            <div class="story-title">From "I Can't" to "I Did"</div>
+            <div class="story-body">
+              12-weeks from low confidence to lifting with intent. Training built around busy work and family life.
+            </div>
+            <div class="story-meta">
+              Weekly check-ins · Sustainable pace
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-title">Breaking Plateaus, Not Backs</div>
+            <div class="story-body">
+              Smart progressions and technique-first coaching unlocked new PRs without burning out or breaking down.
+            </div>
+            <div class="story-meta">
+              Form-focused · Performance driven
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-title">Confidence Beyond The Gym</div>
+            <div class="story-body">
+              Energy, mood, and self-belief all climbed as training became a non-negotiable pillar instead of a chore.
+            </div>
+            <div class="story-meta">
+              Mindset support · Daily wins
+            </div>
+          </div>
+        </div>
+        <a href="#results" class="stories-footer-btn">
+          Read More Success Stories
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="events-section reveal slide-left" id="events">
+    <div class="container">
+      <div class="section-kicker">Community Events</div>
+      <h2 class="section-title">Strength In Numbers</h2>
+      <p class="section-subtitle">
+        Join pop-up events, workshops, and community lift-offs designed to keep you accountable and fired up in {{CITY}}.
+      </p>
+      <div class="events-grid">
+        <article class="event-card">
+          <div class="event-tag">Camp</div>
+          <h3 class="event-title">Winter Strength Camp</h3>
+          <div class="event-meta">
+            4-week progressive lifting block with live technique breakdowns and group finishers.
+          </div>
+          <div class="program-cta">
+            Reserve Spot <span>→</span>
+          </div>
+        </article>
+        <article class="event-card">
+          <div class="event-tag">Workshop</div>
+          <h3 class="event-title">Performance Seminar</h3>
+          <div class="event-meta">
+            Learn how to program your own training, manage fatigue, and lift with precision.
+          </div>
+          <div class="program-cta">
+            Get Ticket <span>→</span>
+          </div>
+        </article>
+        <article class="event-card">
+          <div class="event-tag">Community</div>
+          <h3 class="event-title">Community Lift-Off</h3>
+          <div class="event-meta">
+            Celebrate wins, test new bests, and train alongside other lifters chasing stronger seasons.
+          </div>
+          <div class="program-cta">
+            Join Event <span>→</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="results-section reveal" id="results">
+    <div class="container">
+      <div class="section-kicker">Transformations</div>
+      <h2 class="section-title">Before &amp; After Features</h2>
+      <p class="section-subtitle">
+        Every check-in is another headline in your own progress magazine. Swipe through a few of the transformations your plan can be modeled after.
+      </p>
+      <div class="results-wrapper" id="resultsSlider">
+        <div class="results-track">
+          <div class="result-slide">
+            <img src="{{RESULT_IMAGE_1}}" alt="Client transformation 1">
+            <div class="result-tag">Issue 01 · 12 Week Recomp</div>
+          </div>
+          <div class="result-slide">
+            <img src="{{RESULT_IMAGE_2}}" alt="Client transformation 2">
+            <div class="result-tag">Issue 02 · Strength &amp; Shape</div>
+          </div>
+          <div class="result-slide">
+            <img src="{{RESULT_IMAGE_3}}" alt="Client transformation 3">
+            <div class="result-tag">Issue 03 · Momentum Built</div>
+          </div>
+          <div class="result-slide">
+            <img src="{{RESULT_IMAGE_4}}" alt="Client transformation 4">
+            <div class="result-tag">Issue 04 · Lifestyle Locked In</div>
+          </div>
+        </div>
+        <div class="results-controls">
+          <button class="results-arrow-btn" data-direction="prev" aria-label="Previous result">‹</button>
+          <div class="results-dots">
+            <div class="results-dot active" data-index="0"></div>
+            <div class="results-dot" data-index="1"></div>
+            <div class="results-dot" data-index="2"></div>
+            <div class="results-dot" data-index="3"></div>
+          </div>
+          <button class="results-arrow-btn" data-direction="next" aria-label="Next result">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="reviews-section reveal">
+    <div class="container">
+      <div class="section-kicker">Reviews</div>
+      <h2 class="section-title">What Google Says</h2>
+      <p class="section-subtitle">
+        A sample of the feedback clients leave publicly. You bring the work ethic, {{TRAINER_NAME}} brings the framework.
+      </p>
+      <div class="reviews-carousel">
+        <div class="review-google-badge">Google ★★★★★</div>
+        <div class="reviews-track" id="reviewsTrack">
+          <article class="review-card">
+            <div class="review-header">
+              <div class="review-name">Alex R.</div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <div class="review-body">
+              The programming finally makes sense. Each week built on the last and I never felt lost in the gym.
+            </div>
+            <div class="review-meta">
+              Remote coaching · Strength &amp; fat loss
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-header">
+              <div class="review-name">Jordan P.</div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <div class="review-body">
+              Check-ins kept me accountable and the adjustments around work travel were a game changer.
+            </div>
+            <div class="review-meta">
+              Busy schedule · Flexible structure
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-header">
+              <div class="review-name">Nina L.</div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <div class="review-body">
+              No crash diets. Just clear guidance, realistic goals, and a coach who actually listens.
+            </div>
+            <div class="review-meta">
+              Sustainable habits · Confidence
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-header">
+              <div class="review-name">Sam K.</div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+            <div class="review-body">
+              My lifts, sleep, and energy all improved. I feel like an athlete again instead of just ‘working out’.
+            </div>
+            <div class="review-meta">
+              Strength focus · 6 month block
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="reveal" id="tools">
+    <div class="container">
+      <div class="section-kicker">Interactive Tools</div>
+      <h2 class="section-title">Dial In Your Next Phase</h2>
+      <p class="section-subtitle">
+        Use these quick tools to get a feel for where you’re starting and how {{TRAINER_NAME}} can structure your training and recovery.
+      </p>
+      <div class="tools-grid">
+        <div class="tool-card" id="bmiTool">
+          <h3 class="tool-title">BMI Snapshot</h3>
+          <p class="tool-subtitle">
+            Get a quick, general BMI reading. It’s just one data point, not a verdict on your health.
+          </p>
+          <div class="tool-form-group">
+            <label for="bmiWeight">Weight (kg)</label>
+            <input type="number" id="bmiWeight" min="20" max="400" placeholder="e.g. 75">
+          </div>
+          <div class="tool-form-group">
+            <label for="bmiHeight">Height (cm)</label>
+            <input type="number" id="bmiHeight" min="120" max="230" placeholder="e.g. 170">
+          </div>
+          <button class="tool-button" id="bmiCalculate">
+            Calculate BMI <span>➜</span>
+          </button>
+          <div class="tool-result" id="bmiResult">
+            Enter your height and weight above to see your estimated BMI.
+          </div>
+          <div class="tool-note">
+            This calculator is for general information only and doesn’t replace personalized medical advice.
+          </div>
+        </div>
+        <div class="tool-card" id="reactionTool">
+          <h3 class="tool-title">Reaction Time Tap Test</h3>
+          <p class="tool-subtitle">
+            Test how quickly you react when the signal turns <strong>green</strong>. Great for fun warm-ups and focus drills.
+          </p>
+          <div class="reaction-display ready" id="reactionDisplay">
+            <div class="reaction-message">
+              Tap to start. Wait for <strong>green</strong>, then tap as fast as you can!
+            </div>
+          </div>
+          <div class="tool-result" id="reactionResult">
+            Your last reaction time will appear here.
+          </div>
+          <div class="tool-note">
+            Try a few rounds and see if you can beat your best time. Use it as a playful focus drill before big lifts.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="quiz-section reveal" id="quiz">
+    <div class="container">
+      <div class="section-kicker">Mini Quiz</div>
+      <h2 class="section-title">Pick The Right Session</h2>
+      <p class="section-subtitle">
+        A quick training decision drill. Imagine it’s a busy weekday in {{CITY}} and you only have 30 minutes to train. What’s the best move?
+      </p>
+      <div class="quiz-card">
+        <div class="quiz-avatar-wrap">
+          <div class="quiz-avatar">
+            💪
+          </div>
+        </div>
+        <div class="quiz-content">
+          <div class="quiz-question">
+            With 30 minutes available and a fat-loss strength goal, which option gives you the most impact?
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-option" data-correct="false">
+              30 minutes of random machines
+            </button>
+            <button class="quiz-option" data-correct="true">
+              Big compound lifts + short finishers
+            </button>
+            <button class="quiz-option" data-correct="false">
+              Only stretching and scrolling between sets
+            </button>
+            <button class="quiz-option" data-correct="false">
+              Endless light curls &amp; crunches
+            </button>
+          </div>
+          <div class="quiz-feedback" id="quizFeedback">
+            Tap an option to check your coaching instincts.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer id="contact">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-col-title">Strength &amp; Conditioning Coach</div>
+        <p>
+          {{TRAINER_NAME}} · {{CITY}}<br>
+          Structured training, no-nonsense accountability, and a clear path from “Day One” to “Cover Story”.
+        </p>
+        <ul class="footer-links">
+          <li>Phone: <a href="tel:{{CONTACT_PHONE}}">{{CONTACT_PHONE}}</a></li>
+          <li>Email: <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></li>
+          <li>Website: <a href="{{CONTACT_WEBSITE}}" target="_blank" rel="noopener">{{CONTACT_WEBSITE}}</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Next Steps</div>
+        <p>
+          Ready to turn this into your own transformation issue? Secure your coaching spot and {{TRAINER_NAME}} will guide you through the onboarding process.
+        </p>
+        <p style="margin-top:10px;">
+          <a href="https://www.paypal.com/ncp/payment/NEYDX3SHPX7Z4" class="footer-pay-link activate-link" target="_blank" rel="noopener">
+            Activate your coaching access now →
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Editorial-style coaching experience · Designed for high-impact results in {{CITY}} · © {{TRAINER_NAME}}
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const navToggle = document.getElementById('navToggle');
+      const mainNav = document.getElementById('mainNav');
+      navToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('open');
+      });
+      const defaultPayment = "https://www.paypal.com/ncp/payment/NEYDX3SHPX7Z4";
+      const injectedPayment = "{{PAYMENT_URL}}";
+      let finalPayment = defaultPayment;
+      if (!injectedPayment.includes("{{") && injectedPayment.trim() !== "") {
+        finalPayment = injectedPayment.trim();
+      }
+      document.querySelectorAll('.activate-btn, .activate-link').forEach(btn => {
+        btn.setAttribute('href', finalPayment);
+      });
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      revealEls.forEach(el => observer.observe(el));
+      const heroSlider = document.getElementById('heroSlider');
+      const heroSlides = heroSlider.querySelectorAll('.hero-slide');
+      const heroDotsWrap = document.getElementById('heroDots');
+      const heroDots = heroDotsWrap.querySelectorAll('.hero-dot');
+      let heroIndex = 0;
+      let heroInterval;
+      function showHeroSlide(index) {
+        heroSlides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+        heroDots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+        heroIndex = index;
+      }
+      function nextHeroSlide() {
+        const next = (heroIndex + 1) % heroSlides.length;
+        showHeroSlide(next);
+      }
+      heroDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const idx = Number(dot.dataset.index);
+          showHeroSlide(idx);
+          clearInterval(heroInterval);
+          heroInterval = setInterval(nextHeroSlide, 4800);
+        });
+      });
+      heroInterval = setInterval(nextHeroSlide, 4800);
+      const resultsSlider = document.getElementById('resultsSlider');
+      const resultsTrack = resultsSlider.querySelector('.results-track');
+      const resultSlides = resultsSlider.querySelectorAll('.result-slide');
+      const resultsDots = resultsSlider.querySelectorAll('.results-dot');
+      const arrowButtons = resultsSlider.querySelectorAll('.results-arrow-btn');
+      let resultIndex = 0;
+      let resultsInterval;
+      function updateResultsSlider(index) {
+        const maxIndex = resultSlides.length - 1;
+        if (index < 0) index = maxIndex;
+        if (index > maxIndex) index = 0;
+        resultIndex = index;
+        const offset = -index * 100;
+        resultsTrack.style.transform = 'translateX(' + offset + '%)';
+        resultsDots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+      function nextResult() { updateResultsSlider(resultIndex + 1); }
+      function prevResult() { updateResultsSlider(resultIndex - 1); }
+      arrowButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const dir = btn.dataset.direction;
+          if (dir === 'next') nextResult();
+          else prevResult();
+          clearInterval(resultsInterval);
+          resultsInterval = setInterval(nextResult, 6500);
+        });
+      });
+      resultsDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const idx = Number(dot.dataset.index);
+          updateResultsSlider(idx);
+          clearInterval(resultsInterval);
+          resultsInterval = setInterval(nextResult, 6500);
+        });
+      });
+      resultsInterval = setInterval(nextResult, 6500);
+      let touchStartX = null;
+      let touchEndX = null;
+      resultsSlider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+      resultsSlider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 40) {
+          if (diff < 0) nextResult();
+          else prevResult();
+          clearInterval(resultsInterval);
+          resultsInterval = setInterval(nextResult, 6500);
+        }
+      });
+      const reviewsTrack = document.getElementById('reviewsTrack');
+      let reviewsOffset = 0;
+      let reviewCardWidth = 260 + 12;
+      function stepReviews() {
+        reviewsOffset -= 1;
+        const totalWidth = reviewCardWidth * reviewsTrack.children.length;
+        if (Math.abs(reviewsOffset) >= reviewCardWidth) {
+          reviewsTrack.appendChild(reviewsTrack.firstElementChild);
+          reviewsOffset += reviewCardWidth;
+        }
+        reviewsTrack.style.transform = 'translateX(' + reviewsOffset + 'px)';
+      }
+      setInterval(stepReviews, 28);
+      const bmiBtn = document.getElementById('bmiCalculate');
+      const bmiWeight = document.getElementById('bmiWeight');
+      const bmiHeight = document.getElementById('bmiHeight');
+      const bmiResultBox = document.getElementById('bmiResult');
+      bmiBtn.addEventListener('click', () => {
+        const w = parseFloat(bmiWeight.value);
+        const hCm = parseFloat(bmiHeight.value);
+        if (!w || !hCm) {
+          bmiResultBox.textContent = 'Please enter both your weight and height.';
+          return;
+        }
+        const hM = hCm / 100;
+        const bmi = w / (hM * hM);
+        let category = 'Uncategorized';
+        if (bmi < 18.5) category = 'Underweight range';
+        else if (bmi < 25) category = 'Typical range';
+        else if (bmi < 30) category = 'Higher weight range';
+        else category = 'Much higher weight range';
+        bmiResultBox.innerHTML =
+          'Estimated BMI: <strong>' + bmi.toFixed(1) +
+          '</strong><br>Approximate category: <strong>' + category + '</strong>.<br>' +
+          'Coaching zooms out beyond BMI to focus on strength, performance, and sustainable habits.';
+      });
+      const reactionDisplay = document.getElementById('reactionDisplay');
+      const reactionResult = document.getElementById('reactionResult');
+      let reactionState = 'idle';
+      let reactionTimerId = null;
+      let reactionStart = 0;
+      function resetReaction(message) {
+        reactionState = 'idle';
+        clearTimeout(reactionTimerId);
+        reactionDisplay.classList.remove('wait', 'go');
+        reactionDisplay.classList.add('ready');
+        reactionDisplay.innerHTML =
+          '<div class="reaction-message">' +
+          (message || 'Tap to start. Wait for <strong>green</strong>, then tap as fast as you can!') +
+          '</div>';
+      }
+      resetReaction();
+      reactionDisplay.addEventListener('click', () => {
+        if (reactionState === 'idle') {
+          reactionState = 'waiting';
+          reactionDisplay.classList.remove('ready', 'go');
+          reactionDisplay.classList.add('wait');
+          reactionDisplay.innerHTML =
+            '<div class="reaction-message">Wait for <strong>green</strong>... then TAP!</div>';
+          const delay = 1000 + Math.random() * 2500;
+          reactionTimerId = setTimeout(() => {
+            reactionState = 'go';
+            reactionDisplay.classList.remove('wait');
+            reactionDisplay.classList.add('go');
+            reactionDisplay.innerHTML =
+              '<div class="reaction-message"><strong>GO!</strong> Tap now!</div>';
+            reactionStart = performance.now();
+          }, delay);
+        } else if (reactionState === 'waiting') {
+          resetReaction('Too early! Tap to try again and wait for <strong>green</strong>.');
+        } else if (reactionState === 'go') {
+          const reactionTime = performance.now() - reactionStart;
+          reactionResult.innerHTML =
+            'Nice! Your reaction time: <strong>' + Math.round(reactionTime) + ' ms</strong>.' +
+            '<br>Try a few rounds and see if you can consistently get under 250 ms.';
+          resetReaction('Tap to go again. See if you can beat your best time!');
+        }
+      });
+      const quizOptions = document.querySelectorAll('.quiz-option');
+      const quizFeedback = document.getElementById('quizFeedback');
+      quizOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          const isCorrect = option.dataset.correct === 'true';
+          quizOptions.forEach(o => o.classList.remove('correct', 'incorrect'));
+          if (isCorrect) {
+            option.classList.add('correct');
+            quizFeedback.innerHTML =
+              'Exactly. Big compound lifts plus a short, sharp finisher give you strength, muscle, and conditioning in one focused block.';
+          } else {
+            option.classList.add('incorrect');
+            quizFeedback.innerHTML =
+              'Close, but there\'s a better choice. Prioritizing compound lifts first makes every minute count more.';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
